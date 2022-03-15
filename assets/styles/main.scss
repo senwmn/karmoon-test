@@ -1,0 +1,606 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*                                                        vars                                                        */
+/* ------------------------------------------------------------------------------------------------------------------ */
+$white: #fff;
+$black: #000;
+$grey: #707070;
+$blue: #05f4fa;
+
+$medium: 1150px;
+
+@mixin column {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 7%;
+
+  > div {
+    display: flex;
+  }
+}
+
+@mixin force-center {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Sohne Breit Test";
+  overflow-x: hidden;
+}
+
+.tech {
+  font-family: "Space Mono", monospace;
+}
+
+.title {
+  font-family: "Lerty";
+  color: $blue;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+.keyline {
+  -webkit-text-fill-color: $black;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-color: $white;
+  letter-spacing: 10px;
+}
+
+.keyline.rev {
+  -webkit-text-fill-color: $white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: $black;
+  letter-spacing: 5px;
+  font-size: 6vmax;
+  text-transform: uppercase;
+  font-style: italic;
+  width: 200%;
+  display: block;
+}
+
+.menu {
+  position: fixed;
+  background: $black;
+  color: $white;
+  top: 0;
+  left: 0;
+  right: 100%;
+  transform: translate(100%);
+  transition: all 0.5s ease;
+
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+
+  &.open {
+    right: 0;
+    transform: translate(0);
+    transition: all 0.5s ease;
+  }
+
+  @media screen and (max-width: $medium) {
+    display: flex;
+  }
+
+  .menu-inner {
+    max-width: 70%;
+
+    div {
+      font-size: 5em;
+      margin-bottom: 30px;
+      cursor: pointer;
+      transition: all 0.5s ease;
+
+      &:hover {
+        color: $blue;
+        transition: all 0.5s ease;
+      }
+    }
+  }
+}
+
+nav {
+  display: flex;
+  background: $white;
+  width: 100%;
+  height: 120px;
+  position: sticky;
+  top: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em;
+  text-transform: uppercase;
+  z-index: 999;
+  transition: all 0.5s ease;
+
+  &.smaller {
+    height: 80px;
+    transition: all 0.5s ease;
+
+    .logo {
+      width: 35px;
+      height: 35px;
+
+      span {
+        opacity: 0;
+      }
+    }
+  }
+
+  .logo {
+    background: url("../img/Logo.svg") no-repeat center center;
+    background-size: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1.5px solid $black;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+
+    // &::after {
+    //   content: "KARMOON";
+    //   position: absolute;
+    //   bottom: -15px;
+    //   left: 50%;
+    //   transform: translate(-50%);
+    //   display: block;
+    //   font-size: 0.4em;
+    // }
+
+    span {
+      position: relative;
+      bottom: -15px;
+      font-size: 0.4em;
+    }
+  }
+
+  .nav-items {
+    cursor: pointer;
+    @include force-center;
+
+    span {
+      margin: 0 30px;
+      transition: all 0.5s ease;
+
+      &:hover {
+        color: $blue;
+        transition: all 0.5s ease;
+      }
+    }
+
+    @media screen and (max-width: $medium) {
+      display: none;
+    }
+  }
+
+  .burger {
+    display: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    z-index: 999;
+    top: 20px;
+    left: 20px;
+    padding: 14px;
+    z-index: 9999;
+    cursor: pointer;
+    visibility: visible;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    @media screen and (max-width: $medium) {
+      display: block;
+    }
+
+    span {
+      width: 85%;
+      height: 4px;
+      display: block;
+      background: $black;
+      margin: 5px 0;
+    }
+
+    &.close {
+      transition: all 0.3s ease;
+
+      span {
+        &:nth-child(1) {
+          transform: rotate(45deg) translate(6px, 7px);
+          transition: all 0.3s ease;
+        }
+        &:nth-child(2) {
+          opacity: 0;
+          transition: all 0.3s ease;
+        }
+        &:nth-child(3) {
+          transform: rotate(-45deg) translate(6px, -7px);
+          transition: all 0.3s ease;
+        }
+      }
+    }
+  }
+
+  .options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: $medium) {
+      display: none;
+    }
+
+    #region-selector {
+      position: relative;
+      margin-right: 40px;
+      cursor: pointer;
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        bottom: 2px;
+
+        img {
+          margin-left: 4px;
+        }
+      }
+
+      //   &::after {
+      //     content: "";
+      //     position: absolute;
+      //     right: -30px;
+      //     top: 0;
+      //     display: block;
+      //     background: url("../img/down-icon.svg") no-repeat center center;
+      //     background-size: cover;
+      //     width: 20px;
+      //     height: 20px;
+      //   }
+    }
+
+    > div {
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      width: 18px;
+      margin: 0 12px;
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.promo-bar {
+  text-transform: uppercase;
+  padding: 1em;
+  display: flex;
+  justify-content: space-around;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  span {
+    animation: marquee 15s linear infinite;
+    display: inline-block;
+    padding-left: 10%;
+  }
+}
+
+.subscribe-banner {
+  text-transform: uppercase;
+  padding: 1em;
+  display: flex;
+  justify-content: space-around;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  span {
+    animation: marquee 15s linear infinite;
+    display: inline-block;
+    padding-left: 100%;
+  }
+}
+
+section {
+  padding: 2em;
+
+  h1 {
+    font-size: 5em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: 4em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  p {
+    max-width: 50%;
+    font-weight: 200;
+    line-height: 1.6;
+
+    @media screen and (max-width: $medium) {
+      max-width: unset;
+    }
+
+    &:last-of-type {
+      margin-bottom: 30px;
+    }
+
+    &.extended {
+      line-height: 2;
+    }
+  }
+
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /*                                                      section 1                                                     */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+
+  &#intro {
+    background: url("../img/HP\ Hero.png") no-repeat right bottom;
+    background-size: cover;
+    background-color: $black;
+    color: $white;
+    min-height: 800px;
+    position: relative;
+
+    * {
+      position: relative;
+      z-index: 3;
+    }
+
+    @media screen and (max-width: $medium) {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /*                                                      section 2                                                     */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+
+  &#team {
+    padding: 8em;
+
+    @media screen and (max-width: $medium) {
+      padding: 2em;
+    }
+  }
+
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /*                                                      section 3                                                     */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  &#weare {
+    background: #000;
+    color: #fff;
+    min-height: 1000px;
+
+    @media screen and (max-width: $medium) {
+      min-height: unset;
+    }
+
+    h1 {
+      letter-spacing: 10px;
+      margin-bottom: 0;
+    }
+
+    .title-area {
+      position: relative;
+      margin-bottom: 60px;
+
+      h1 {
+        line-height: 1;
+        font-size: 7vmax;
+        // position: absolute;
+        position: relative;
+        left: -55px;
+
+        &:last-of-type {
+          position: relative;
+          left: -47px;
+        }
+
+        @media screen and (max-width: $medium) {
+          width: 200%;
+        }
+      }
+    }
+
+    .carousel {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+
+      .carousel-item {
+        background: red;
+        min-height: 500px;
+        flex: 1;
+        margin: 0 50px;
+        position: relative;
+
+        @media screen and (max-width: $medium) {
+          margin-bottom: 160px;
+        }
+
+        &:nth-child(1) {
+          position: relative;
+          left: -200px;
+          background: url("../img/mace.png") no-repeat center center;
+          background-size: cover;
+
+          .title {
+            position: relative;
+            bottom: 50px;
+            left: -115px;
+
+            @media screen and (max-width: $medium) {
+              left: 0;
+            }
+          }
+
+          @media screen and (max-width: $medium) {
+            left: 0;
+          }
+        }
+
+        &:nth-child(2) {
+          position: relative;
+          background: url("../img/vader.png") no-repeat center center;
+          background-size: 95%;
+          flex: 2;
+          z-index: 10;
+          top: -95px;
+
+          @media screen and (max-width: $medium) {
+            top: 0;
+          }
+        }
+
+        &:nth-child(3) {
+          background: url("../img/tiger.svg") no-repeat center center;
+          background-size: cover;
+          position: relative;
+          right: -170px;
+
+          @media screen and (max-width: $medium) {
+            right: 0;
+          }
+
+          //   background: blue;
+        }
+
+        .ci-details {
+          position: absolute;
+          bottom: -105px;
+          left: 0;
+
+          @media screen and (max-width: $medium) {
+            bottom: -125px;
+          }
+        }
+
+        .subject {
+          font-size: 3em;
+          width: 200%;
+        }
+
+        .title {
+          font-size: 4.5em;
+          margin: 15px 0;
+          width: 350%;
+        }
+      }
+
+      @media screen and (max-width: $medium) {
+        display: block;
+      }
+    }
+  }
+}
+
+.cols {
+  @include column;
+
+  .col {
+    &:last-of-type {
+      padding-top: 15%;
+    }
+  }
+
+  img {
+    display: block;
+    height: fit-content;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.darker {
+  background: #050001;
+}
+
+footer {
+  width: 100%;
+  padding: 2em;
+  display: flex;
+  border-top: 1px solid $grey;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  height: 160px;
+
+  .logo {
+    background: url("../img/Logo.svg") no-repeat center center;
+    background-size: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1.5px solid $black;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+
+  > div {
+    font-size: 0.7em;
+    span {
+      margin-left: 15px;
+      transition: all 0.5s ease;
+      cursor: pointer;
+
+      &:hover {
+        color: $blue;
+        transition: all 0.5s ease;
+      }
+    }
+  }
+}

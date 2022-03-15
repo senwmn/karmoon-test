@@ -1,0 +1,691 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*                                                        vars                                                        */
+/* ------------------------------------------------------------------------------------------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: "Sohne Breit Test";
+  overflow-x: hidden;
+}
+
+.tech {
+  font-family: "Space Mono", monospace;
+}
+
+.title {
+  font-family: "Lerty";
+  color: #05f4fa;
+}
+
+@-webkit-keyframes marquee {
+  0% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(-100%, 0);
+            transform: translate(-100%, 0);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(-100%, 0);
+            transform: translate(-100%, 0);
+  }
+}
+
+.keyline {
+  -webkit-text-fill-color: #000;
+  -webkit-text-stroke-width: 0.2px;
+  -webkit-text-stroke-color: #fff;
+  letter-spacing: 10px;
+}
+
+.keyline.rev {
+  -webkit-text-fill-color: #fff;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #000;
+  letter-spacing: 5px;
+  font-size: 6vmax;
+  text-transform: uppercase;
+  font-style: italic;
+  width: 200%;
+  display: block;
+}
+
+.menu {
+  position: fixed;
+  background: #000;
+  color: #fff;
+  top: 0;
+  left: 0;
+  right: 100%;
+  -webkit-transform: translate(100%);
+          transform: translate(100%);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 100;
+}
+
+.menu.open {
+  right: 0;
+  -webkit-transform: translate(0);
+          transform: translate(0);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 1150px) {
+  .menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.menu .menu-inner {
+  max-width: 70%;
+}
+
+.menu .menu-inner div {
+  font-size: 5em;
+  margin-bottom: 30px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.menu .menu-inner div:hover {
+  color: #05f4fa;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #fff;
+  width: 100%;
+  height: 120px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2em;
+  text-transform: uppercase;
+  z-index: 999;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+nav.smaller {
+  height: 80px;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+nav.smaller .logo {
+  width: 35px;
+  height: 35px;
+}
+
+nav.smaller .logo span {
+  opacity: 0;
+}
+
+nav .logo {
+  background: url("../img/Logo.svg") no-repeat center center;
+  background-size: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1.5px solid #000;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  text-align: center;
+}
+
+nav .logo span {
+  position: relative;
+  bottom: -15px;
+  font-size: 0.4em;
+}
+
+nav .nav-items {
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+nav .nav-items span {
+  margin: 0 30px;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+nav .nav-items span:hover {
+  color: #05f4fa;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 1150px) {
+  nav .nav-items {
+    display: none;
+  }
+}
+
+nav .burger {
+  display: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  z-index: 999;
+  top: 20px;
+  left: 20px;
+  padding: 14px;
+  z-index: 9999;
+  cursor: pointer;
+  visibility: visible;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1150px) {
+  nav .burger {
+    display: block;
+  }
+}
+
+nav .burger span {
+  width: 85%;
+  height: 4px;
+  display: block;
+  background: #000;
+  margin: 5px 0;
+}
+
+nav .burger.close {
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+nav .burger.close span:nth-child(1) {
+  -webkit-transform: rotate(45deg) translate(6px, 7px);
+          transform: rotate(45deg) translate(6px, 7px);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+nav .burger.close span:nth-child(2) {
+  opacity: 0;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+nav .burger.close span:nth-child(3) {
+  -webkit-transform: rotate(-45deg) translate(6px, -7px);
+          transform: rotate(-45deg) translate(6px, -7px);
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+nav .options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 1150px) {
+  nav .options {
+    display: none;
+  }
+}
+
+nav .options #region-selector {
+  position: relative;
+  margin-right: 40px;
+  cursor: pointer;
+}
+
+nav .options #region-selector span {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  bottom: 2px;
+}
+
+nav .options #region-selector span img {
+  margin-left: 4px;
+}
+
+nav .options > div {
+  cursor: pointer;
+}
+
+nav .options img {
+  display: block;
+  width: 18px;
+  margin: 0 12px;
+}
+
+nav::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #000;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.promo-bar {
+  text-transform: uppercase;
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.promo-bar span {
+  -webkit-animation: marquee 15s linear infinite;
+          animation: marquee 15s linear infinite;
+  display: inline-block;
+  padding-left: 10%;
+}
+
+.subscribe-banner {
+  text-transform: uppercase;
+  padding: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.subscribe-banner span {
+  -webkit-animation: marquee 15s linear infinite;
+          animation: marquee 15s linear infinite;
+  display: inline-block;
+  padding-left: 100%;
+}
+
+section {
+  padding: 2em;
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /*                                                      section 1                                                     */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /*                                                      section 2                                                     */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+  /*                                                      section 3                                                     */
+  /* ------------------------------------------------------------------------------------------------------------------ */
+}
+
+section h1 {
+  font-size: 5em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+section h2 {
+  font-size: 4em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+section p {
+  max-width: 50%;
+  font-weight: 200;
+  line-height: 1.6;
+}
+
+@media screen and (max-width: 1150px) {
+  section p {
+    max-width: unset;
+  }
+}
+
+section p:last-of-type {
+  margin-bottom: 30px;
+}
+
+section p.extended {
+  line-height: 2;
+}
+
+section#intro {
+  background: url("../img/HP Hero.png") no-repeat right bottom;
+  background-size: cover;
+  background-color: #000;
+  color: #fff;
+  min-height: 800px;
+  position: relative;
+}
+
+section#intro * {
+  position: relative;
+  z-index: 3;
+}
+
+@media screen and (max-width: 1150px) {
+  section#intro::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+}
+
+section#team {
+  padding: 8em;
+}
+
+@media screen and (max-width: 1150px) {
+  section#team {
+    padding: 2em;
+  }
+}
+
+section#weare {
+  background: #000;
+  color: #fff;
+  min-height: 1000px;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare {
+    min-height: unset;
+  }
+}
+
+section#weare h1 {
+  letter-spacing: 10px;
+  margin-bottom: 0;
+}
+
+section#weare .title-area {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+section#weare .title-area h1 {
+  line-height: 1;
+  font-size: 7vmax;
+  position: relative;
+  left: -55px;
+}
+
+section#weare .title-area h1:last-of-type {
+  position: relative;
+  left: -47px;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .title-area h1 {
+    width: 200%;
+  }
+}
+
+section#weare .carousel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+section#weare .carousel .carousel-item {
+  background: red;
+  min-height: 500px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0 50px;
+  position: relative;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .carousel .carousel-item {
+    margin-bottom: 160px;
+  }
+}
+
+section#weare .carousel .carousel-item:nth-child(1) {
+  position: relative;
+  left: -200px;
+  background: url("../img/mace.png") no-repeat center center;
+  background-size: cover;
+}
+
+section#weare .carousel .carousel-item:nth-child(1) .title {
+  position: relative;
+  bottom: 50px;
+  left: -115px;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .carousel .carousel-item:nth-child(1) .title {
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .carousel .carousel-item:nth-child(1) {
+    left: 0;
+  }
+}
+
+section#weare .carousel .carousel-item:nth-child(2) {
+  position: relative;
+  background: url("../img/vader.png") no-repeat center center;
+  background-size: 95%;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  z-index: 10;
+  top: -95px;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .carousel .carousel-item:nth-child(2) {
+    top: 0;
+  }
+}
+
+section#weare .carousel .carousel-item:nth-child(3) {
+  background: url("../img/tiger.svg") no-repeat center center;
+  background-size: cover;
+  position: relative;
+  right: -170px;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .carousel .carousel-item:nth-child(3) {
+    right: 0;
+  }
+}
+
+section#weare .carousel .carousel-item .ci-details {
+  position: absolute;
+  bottom: -105px;
+  left: 0;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .carousel .carousel-item .ci-details {
+    bottom: -125px;
+  }
+}
+
+section#weare .carousel .carousel-item .subject {
+  font-size: 3em;
+  width: 200%;
+}
+
+section#weare .carousel .carousel-item .title {
+  font-size: 4.5em;
+  margin: 15px 0;
+  width: 350%;
+}
+
+@media screen and (max-width: 1150px) {
+  section#weare .carousel {
+    display: block;
+  }
+}
+
+.cols {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  grid-gap: 7%;
+}
+
+.cols > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.cols .col:last-of-type {
+  padding-top: 15%;
+}
+
+.cols img {
+  display: block;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.darker {
+  background: #050001;
+}
+
+footer {
+  width: 100%;
+  padding: 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-top: 1px solid #707070;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-transform: uppercase;
+  height: 160px;
+}
+
+footer .logo {
+  background: url("../img/Logo.svg") no-repeat center center;
+  background-size: 50%;
+  width: 50px;
+  height: 50px;
+  border: 1.5px solid #000;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  text-align: center;
+}
+
+footer > div {
+  font-size: 0.7em;
+}
+
+footer > div span {
+  margin-left: 15px;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+footer > div span:hover {
+  color: #05f4fa;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+/*# sourceMappingURL=main.css.map */
